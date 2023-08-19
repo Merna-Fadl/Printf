@@ -25,11 +25,13 @@ int _printf(const char *format, ...)
 
 			if (*format == 'c')
 			{
-				count += putchar(va_arg(args, int));
+				char c = putchar(va_arg(args, int));
+				count++;
 			}
 			else if (*format == 's')
 			{
-				count += puts(va_arg(args, char *));
+				char s = puts(va_arg(args, char *));
+				count++;
 			}
 			else if (*format == '%')
 			{
