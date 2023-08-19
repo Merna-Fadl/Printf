@@ -10,5 +10,8 @@
  * Return: The number of characters printed (excluding the null byte used to end output to strings).
  */
 int _printf(const char *format, ...);
+int print_chr(va_list arguments);
+int print_str(va_list arguments);
+int print_prg(va_list arguments);
 
 #endif /* _MAIN_H_ */
