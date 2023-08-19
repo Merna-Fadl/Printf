@@ -1,17 +1,6 @@
-#ifndef _MAIN_H_
-#define _MAIN_H_
+#ifndef MAIN_H
+#define MAIN_H
 
-#include <stdarg.h>
-
-/**
- * _printf - Produces output according to a format.
- * @format: The format string.
- *
- * Return: The number of characters printed (excluding the null byte used to end output to strings).
- */
 int _printf(const char *format, ...);
-int print_chr(va_list arguments);
-int print_str(va_list arguments);
-int print_prg(va_list arguments);
 
-#endif /* _MAIN_H_ */
+#endif /* MAIN_H */
