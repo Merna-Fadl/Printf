@@ -1,11 +1,9 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdarg.h>
-
 /**
  * _printf - Produces output according to a format.
  * @format: The format string.
- *
  * Return: The number of characters printed
  * (excluding the null byte used to end output to strings).
  */
@@ -16,18 +14,14 @@ int _printf(const char *format, ...)
 
 	if (format == NULL)
 		return (-1);
-
 	va_start(args, format);
-
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
 			format++;
-
 			if (*format == '\0')
 				return (-1);
-
 			switch (*format)
 			{
 				case 'c':
@@ -40,25 +34,17 @@ int _printf(const char *format, ...)
 					if (str == NULL)
 						str = "(null)";
 					count += printf("%s", str);
-					break;
-				}
+					break; }
 				case '%':
 					count += putchar('%');
 					break;
 				default:
 					count += putchar('%');
 					count += putchar(*format);
-					break;
-			}
-		}
+					break; }}
 		else
 		{
-			count += putchar(*format);
-		}
-
-		format++;
-	}
-
+			count += putchar(*format); }
+		format++; }
 	va_end(args);
-	return (count);
-}
+	return (count); }
