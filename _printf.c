@@ -14,6 +14,9 @@ int _printf(const char *format, ...)
 	va_list args;
 	int count = 0;
 
+	if (format == NULL)
+		return (-1);
+
 	va_start(args, format);
 
 	while (*format != '\0')
@@ -22,14 +25,23 @@ int _printf(const char *format, ...)
 		{
 			format++;
 
+			if (*format == '\0')
+				return (-1);
+
 			switch (*format)
 			{
 				case 'c':
 					count += putchar(va_arg(args, int));
 					break;
 				case 's':
-					count += puts(va_arg(args, char *));
+				{
+					char *str = va_arg(args, char *);
+
+					if (str == NULL)
+						str = "(null)";
+					count += printf("%s", str);
 					break;
+				}
 				case '%':
 					count += putchar('%');
 					break;
