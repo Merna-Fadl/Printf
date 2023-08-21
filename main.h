@@ -2,6 +2,7 @@
 #define _MAIN_H_
 
 #include <stdarg.h>
+#include <stdio.h>
 
 /**
  * _printf - Produces output according to a format.

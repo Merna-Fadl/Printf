@@ -1,6 +1,4 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdarg.h>
 /**
  * _printf - Produces output according to a format.
  * @format: The format string.
@@ -8,8 +6,7 @@
  * (excluding the null byte used to end output to strings).
  */
 int _printf(const char *format, ...)
-{
-	va_list args;
+{va_list args;
 	int count = 0;
 
 	if (format == NULL)
@@ -27,17 +24,23 @@ int _printf(const char *format, ...)
 				case 'c':
 					count += putchar(va_arg(args, int));
 					break;
-				case 's':
-				{
+				case 's': {
 					char *str = va_arg(args, char *);
 
 					if (str == NULL)
-						str = "(null)";
+						str = "(NULL)";
 					count += printf("%s", str);
 					break; }
 				case '%':
 					count += putchar('%');
 					break;
+				case ('d' || 'i'): {
+						int value = va_arg(arg, int);
+
+						if (value == NULL)
+							value = "(NULL)";
+						count += printf("%d", value);
+				       break; }
 				default:
 					count += putchar('%');
 					count += putchar(*format);
