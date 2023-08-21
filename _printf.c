@@ -8,7 +8,6 @@
  *
  * Return: The number of characters printed
  * (excluding the null byte used to end output to strings).
- *
  */
 int _printf(const char *format, ...)
 {
@@ -23,23 +22,21 @@ int _printf(const char *format, ...)
 		{
 			format++;
 
-			if (*format == 'c')
+			switch (*format)
 			{
-				count += putchar(va_arg(args, int));
-			}
-			else if (*format == 's')
-			{
-				count += puts(va_arg(args, char *));
-
-			}
-			else if (*format == '%')
-			{
-				count += putchar('%');
-			}
-			else
-			{
-				count += putchar('%');
-				count += putchar(*format);
+				case 'c':
+					count += putchar(va_arg(args, int));
+					break;
+				case 's':
+					count += puts(va_arg(args, char *));
+					break;
+				case '%':
+					count += putchar('%');
+					break;
+				default:
+					count += putchar('%');
+					count += putchar(*format);
+					break;
 			}
 		}
 		else
