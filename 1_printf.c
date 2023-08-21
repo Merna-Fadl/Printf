@@ -1,4 +1,7 @@
 #include "main.h"
+#include <stdio.h>
+#include <starg.h>
+#include <stdlib.h>
 
 /**
  * format_int - function that produced format integer
