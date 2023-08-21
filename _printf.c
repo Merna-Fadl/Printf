@@ -34,13 +34,6 @@ int _printf(const char *format, ...)
 				case '%':
 					count += putchar('%');
 					break;
-				case ('d' || 'i'): {
-						int value = va_arg(arg, int);
-
-						if (value == NULL)
-							value = "(NULL)";
-						count += printf("%d", value);
-				       break; }
 				default:
 					count += putchar('%');
 					count += putchar(*format);
