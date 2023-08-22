@@ -1,14 +1,9 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdarg.h>
-
 /**
  * _printf - Produces output according to a format.
  * @format: The format string.
- *
  * Return: The number of characters printed
  * (excluding the null byte used to end output to strings).
- *
  */
 int _printf(const char *format, ...)
 {
@@ -43,7 +38,8 @@ int _printf(const char *format, ...)
 				default:
 					count += putchar('%');
 					count += putchar(*format);
-					break; }}
+					break; }
+		}
 		else
 		{
 			count += putchar(*format);
