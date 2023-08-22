@@ -21,33 +21,33 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			if (*format == 'c')
+			if (*format == '\0')
+				return (-1);
+			switch (*format)
 			{
-				char ch = putchar(va_arg(args, int));
+				case 'c':
+					char ch = putchar(va_arg(args, int));
 
-				count++;
-			}
-			else if (*format == 's')
-			{
-				char *str = putchar(va_arg(args, char *));
+					count++;
+					break;
+				case 's':
+					char *str = va_arg(args, char *);
 
-				count++;
-			}
-			else if (*format == '%')
-			{
-				count += putchar('%');
-			}
-			else
-			{
-				count += putchar('%');
-				count += putchar(*format);
-			}
-		}
+					if (str == NULL)
+						str = "(NULL)";
+					count += printf("%s", str);
+					break;
+				case '%':
+					count += putchar('%');
+					break;
+				default:
+					count += putchar('%');
+					count += putchar(*format);
+					break; }}
 		else
 		{
 			count += putchar(*format);
-		}
-		format++;
+		} format++;
 	}
 	va_end(args);
 	return (count);
