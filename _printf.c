@@ -12,9 +12,11 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (-1);
 	va_start(args, format);
-	while (*format != '\0')
+	while (*format)
 	{
-		if (*format == '%')
+		if (*format != '%')
+			putchar(format);
+		else
 		{
 			format++;
 			if (*format == '\0')
