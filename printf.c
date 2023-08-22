@@ -15,36 +15,36 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	while (*format != '\0')
 	{
-		if (*formmat != '%')
-			putchar(format);
+		if (*format == '%')
+		{
+			putchar(*format);
 			count++;
-		else
-			format++;
 		if (*format == 'c')
 		{
-			int ch = var_arg(args, int);
+			int ch = va_arg(args, int);
 
-			putchr(ch);
+			putchar(ch);
 			count++; }
 		else if (*format == 's')
 		{
 			char *str = va_arg(args, char*);
 
-			putchar(str);
+			putchar(*str);
 			count++; }
 		else if (*format == '%')
 		{
-			putchar(format);
+			putchar(*format);
 			count++;
 		}
-		else if ((*format == 'd') || (*format == 'i')
+		else if ((*format == 'd') || (*format == 'i'))
 		{
 			int des = va_arg(args, int);
 
 			putchar(des);
 			count++;
 		}
+		}
 	format++; }
 	va_end(args);
-	return (args);
+	return (count);
 }
