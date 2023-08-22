@@ -37,6 +37,13 @@ int _printf(const char *format, ...)
 			putchar(format);
 			count++;
 		}
+		else if ((*format == 'd') || (*format == 'i')
+		{
+			int des = va_arg(args, int);
+
+			putchar(des);
+			count++;
+		}
 	format++; }
 	va_end(args);
 	return (args);
