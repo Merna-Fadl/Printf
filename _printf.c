@@ -1,51 +1,79 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdarg.h>
+
 /**
- * _printf - function that produce output
- * @format: string
- * @...: argument
- * Return: the num of character printed
+ * _printf - Produces output according to a format.
+ * @format: The format string.
+ *
+ * Return: The number of characters printed
+ * (excluding the null byte used to end output to strings).
  */
 int _printf(const char *format, ...)
 {
-	int count = 0;
 	va_list args;
+	int count = 0;
 
 	if (format == NULL)
 		return (-1);
+
 	va_start(args, format);
+
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
-			putchar(*format);
-			count++;
-		if (*format == 'c')
-		{
-			int ch = va_arg(args, int);
+			format++;
 
-			putchar(ch);
-			count++; }
-		else if (*format == 's')
-		{
-			char *str = va_arg(args, char*);
+			if (*format == '\0')
+				return (-1);
 
-			putchar(*str);
-			count++; }
-		else if (*format == '%')
-		{
-			putchar(*format);
-			count++;
+			switch (*format)
+			{
+				case 'c':
+					count += putchar(va_arg(args, int));
+					break;
+				case 's':
+				{
+					char *str = va_arg(args, char *);
+					if (str == NULL)
+						str = "(null)";
+					count += printf("%s", str);
+					break;
+				}
+				case '%':
+					count += putchar('%');
+					break;
+				case 'd':
+				case 'i':
+					count += printf("%d", va_arg(args, int));
+					break;
+				case 'u':
+					count += printf("%u", va_arg(args, unsigned int));
+					break;
+				case 'o':
+					count += printf("%o", va_arg(args, unsigned int));
+					break;
+				case 'x':
+					count += printf("%x", va_arg(args, unsigned int));
+					break;
+				case 'X':
+					count += printf("%X", va_arg(args, unsigned int));
+					break;
+				default:
+					count += putchar('%');
+					count += putchar(*format);
+					break;
+			}
 		}
-		else if ((*format == 'd') || (*format == 'i'))
+		else
 		{
-			int des = va_arg(args, int);
+			count += putchar(*format);
+		}
 
-			putchar(des);
-			count++;
-		}
-		}
-	format++; }
+		format++;
+	}
+
 	va_end(args);
 	return (count);
 }
-
