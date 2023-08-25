@@ -46,10 +46,6 @@ int _printf(const char *format, ...)
 					break;
 				case 'd':
 				case 'i':
-					if (plus_flag)
-						count += printf("+");
-					else if (space_flag)
-						count += printf(" ");
 					count += printf("%d", va_arg(args, int));
 					break;
 				case 'u':
